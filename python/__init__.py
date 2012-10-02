@@ -62,10 +62,6 @@ try: #it may not exist based on prereqs
     from virtual_channel_formatter import *
 except ImportError: pass
 
-try: #it may not exist based on prereqs
-    from virtual_channel_mux import *
-except ImportError: pass
-
 from pmt_rpc import pmt_rpc
 
 #backwards compatible contructor for old style suffix types
