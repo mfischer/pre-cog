@@ -20,37 +20,7 @@
 ########################################################################
 # Install GRC xml files
 ########################################################################
-if(UHD_FOUND)
-    list(APPEND grc_sources
-        extras_uhd_amsg_source.xml
-    )
-endif()
-
 list(APPEND grc_sources
-    extras_add_const.xml
-    extras_block_tree.xml
-    extras_divide.xml
-    extras_multiply.xml
-    extras_signal_source.xml
-    extras_subtract.xml
-    extras_add.xml
-    extras_delay.xml
-    extras_multiply_const.xml
-    extras_noise_source.xml
-    extras_decim_fir.xml
-    extras_blob_to_socket.xml
-    extras_blob_to_stream.xml
-    extras_socket_to_blob.xml
-    extras_stream_to_blob.xml
-    extras_tuntap.xml
-    extras_packet_framer.xml
-    extras_packet_deframer.xml
-    extras_stream_selector.xml
-    extras_pmt_rpc.xml
-    extras_msg_many_to_one.xml
-    extras_socket_msg.xml
-    extras_transition_detect.xml
-    extras_msg_to_stdout.xml
     simple_mac.xml
     extras_append_key.xml
     heart_beat.xml
