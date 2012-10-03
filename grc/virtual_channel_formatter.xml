@@ -7,8 +7,8 @@
 <block>
     <name>Extras: Virtual Channel Formatter</name>
     <key>virtual_channel_formatter</key>
-    <import>import gnuradio.extras as gr_extras</import>
-    <make>gr_extras.virtual_channel_formatter($channel,$arq)</make>
+    <import>import precog</import>
+    <make>precog.virtual_channel_formatter($channel,$arq)</make>
     <param>
         <name>Dest. Address</name>
         <key>channel</key>

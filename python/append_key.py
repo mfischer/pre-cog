@@ -25,7 +25,7 @@ from gnuradio import gr
 from gruel import pmt
 from gnuradio.digital import packet_utils
 import gnuradio.digital as gr_digital
-import block_gateway #needed to inject into gr
+import gnuradio.extras #brings in gr.block
 
 # /////////////////////////////////////////////////////////////////////////////
 #                   Blob Append Key (overwrites)

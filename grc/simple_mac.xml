@@ -7,8 +7,8 @@
 <block>
     <name>Extras: Simple MAC</name>
     <key>simple_mac</key>
-    <import>import gnuradio.extras as gr_extras</import>
-    <make>gr_extras.simple_mac($addr,$timeout,$maximum_attempts)</make>
+    <import>import precog</import>
+    <make>precog.simple_mac($addr,$timeout,$maximum_attempts)</make>
     <param>
         <name>Address(0-255)</name>
         <key>addr</key>

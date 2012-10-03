@@ -1,4 +1,4 @@
-# Copyright 2011-2012 Free Software Foundation, Inc.
+# Copyright 2011 Free Software Foundation, Inc.
 #
 # This file is part of GNU Radio
 #
@@ -17,23 +17,30 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 
-########################################################################
-# Install GRC xml files
-########################################################################
-list(APPEND grc_sources
-    simple_mac.xml
-    extras_append_key.xml
-    heart_beat.xml
-    burst_gate.xml
-    channel_access_controller.xml
-    tdma_engine.xml
-    virtual_channel_formatter.xml
-    virtual_channel_mux.xml
-    virtual_channel_demux.xml
-)
+if(DEFINED __INCLUDED_GR_PLATFORM_CMAKE)
+    return()
+endif()
+set(__INCLUDED_GR_PLATFORM_CMAKE TRUE)
 
-install(
-    FILES ${grc_sources}
-    DESTINATION ${GRC_BLOCKS_DIR}
-    COMPONENT "precog_python"
-)
+########################################################################
+# Setup additional defines for OS types
+########################################################################
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    set(LINUX TRUE)
+endif()
+
+if(LINUX AND EXISTS "/etc/debian_version")
+    set(DEBIAN TRUE)
+endif()
+
+if(LINUX AND EXISTS "/etc/redhat-release")
+    set(REDHAT TRUE)
+endif()
+
+########################################################################
+# when the library suffix should be 64 (applies to redhat linux family)
+########################################################################
+if(NOT DEFINED LIB_SUFFIX AND REDHAT AND CMAKE_SYSTEM_PROCESSOR MATCHES "64$")
+    set(LIB_SUFFIX 64)
+endif()
+set(LIB_SUFFIX ${LIB_SUFFIX} CACHE STRING "lib directory suffix")
