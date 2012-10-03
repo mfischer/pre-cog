@@ -7,8 +7,8 @@
 <block>
     <name>Extras: Append Key</name>
     <key>append_key</key>
-    <import>import gnuradio.extras as gr_extras</import>
-    <make>gr_extras.append_key($key)</make>
+    <import>import precog</import>
+    <make>precog.append_key($key)</make>
     <param>
         <name>Key String</name>
         <key>key</key>

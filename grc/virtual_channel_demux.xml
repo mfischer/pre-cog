@@ -7,8 +7,8 @@
 <block>
     <name>Extras: Virtual Channel Demux</name>
     <key>virtual_channel_demux</key>
-    <import>import gnuradio.extras as gr_extras</import>
-    <make>gr_extras.virtual_channel_demux($ports)</make>
+    <import>import precog</import>
+    <make>precog.virtual_channel_demux($ports)</make>
     <param>
         <name>Output Ports</name>
         <key>ports</key>

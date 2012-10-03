@@ -24,11 +24,6 @@ include(GrPython)
 
 list(APPEND python_sources
     __init__.py
-    block_gateway.py
-    extras_pmt.py
-    pmt_to_python.py
-    pmt_rpc.py
-    packet_framer.py
     transition_detect.py
     msg_to_stdout.py
     simple_mac.py
@@ -43,8 +38,8 @@ list(APPEND python_sources
 
 GR_PYTHON_INSTALL(
     FILES ${python_sources}
-    DESTINATION ${GR_PYTHON_DIR}/gnuradio/extras
-    COMPONENT "extras_python"
+    DESTINATION ${GR_PYTHON_DIR}/precog
+    COMPONENT "precog_python"
 )
 
 ########################################################################
@@ -53,21 +48,8 @@ GR_PYTHON_INSTALL(
 include(GrTest)
 
 list(APPEND extras_qa_sources
-    qa_add_and_friends.py
-    qa_block_gateway.py
-    qa_delay.py
-    qa_noise_source.py
-    qa_signal_source.py
-    qa_pmt.py
-    qa_msg_passing.py
-    qa_pmt_to_python.py
-    qa_pmt_rpc.py
+    #TODO
 )
-
-set(GR_TEST_PYTHON_DIRS
-    ${CMAKE_CURRENT_BINARY_DIR}/../swig
-)
-
 #assume super tree
 if(ENABLE_EXTRAS)
     list(APPEND GR_TEST_PYTHON_DIRS ${CMAKE_SOURCE_DIR}/gruel/src/python)
