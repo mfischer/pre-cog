@@ -22,7 +22,7 @@
 ########################################################################
 list(APPEND grc_sources
     simple_mac.xml
-    extras_append_key.xml
+    append_key.xml
     heart_beat.xml
     burst_gate.xml
     channel_access_controller.xml
@@ -30,6 +30,8 @@ list(APPEND grc_sources
     virtual_channel_formatter.xml
     virtual_channel_mux.xml
     virtual_channel_demux.xml
+    fhss_engine.xml
+    block_tree.xml
 )
 
 install(

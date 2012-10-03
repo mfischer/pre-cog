@@ -25,9 +25,8 @@ try: #it may not exist based on prereqs
     from msg_to_stdout import msg_to_stdout
 except ImportError: pass
 
-try: #it may not exist based on prereqs
-    from simple_mac import simple_mac
-except ImportError: pass
+
+from simple_mac import simple_mac
 
 try: #it may not exist based on prereqs
     from append_key import append_key
@@ -57,6 +56,8 @@ try: #it may not exist based on prereqs
     from virtual_channel_formatter import *
 except ImportError: pass
 
+
+from fhss_engine import *
 
 
 

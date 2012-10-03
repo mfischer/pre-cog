@@ -5,7 +5,7 @@
 ###################################################
  -->
 <block>
-    <name>Extras: Virtual Channel Mux</name>
+    <name>Virtual Channel Mux</name>
     <key>virtual_channel_mux</key>
     <import>import precog</import>
     <make>precog.virtual_channel_mux($ports)</make>

@@ -5,7 +5,7 @@
 ###################################################
  -->
 <block>
-    <name>Extras: TDMA Engine</name>
+    <name>TDMA Engine</name>
     <key>tdma_engine</key>
     <import>import precog</import>
     <make>precog.tdma_engine($initial_slot,$slot_interval,$guard_interval,$num_slots,$lead_limit,$link_bps)</make>

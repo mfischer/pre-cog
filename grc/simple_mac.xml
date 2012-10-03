@@ -5,7 +5,7 @@
 ###################################################
  -->
 <block>
-    <name>Extras: Simple MAC</name>
+    <name>Simple MAC</name>
     <key>simple_mac</key>
     <import>import precog</import>
     <make>precog.simple_mac($addr,$timeout,$maximum_attempts)</make>

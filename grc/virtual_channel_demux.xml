@@ -5,7 +5,7 @@
 ###################################################
  -->
 <block>
-    <name>Extras: Virtual Channel Demux</name>
+    <name>Virtual Channel Demux</name>
     <key>virtual_channel_demux</key>
     <import>import precog</import>
     <make>precog.virtual_channel_demux($ports)</make>

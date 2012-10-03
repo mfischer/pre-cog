@@ -5,7 +5,7 @@
 ###################################################
  -->
 <block>
-    <name>Extras: Virtual Channel Formatter</name>
+    <name>Virtual Channel Formatter</name>
     <key>virtual_channel_formatter</key>
     <import>import precog</import>
     <make>precog.virtual_channel_formatter($channel,$arq)</make>

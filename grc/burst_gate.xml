@@ -5,7 +5,7 @@
 ###################################################
  -->
 <block>
-    <name>Precog: Burst Gate</name>
+    <name>Burst Gate</name>
     <key>burst_gate</key>
     <import>import precog</import>
     <make>precog.burst_gate()</make>

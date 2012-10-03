@@ -5,7 +5,7 @@
 ###################################################
  -->
 <block>
-    <name>Extras: Heartbeat</name>
+    <name>Heartbeat</name>
     <key>heart_beat</key>
     <import>import precog</import>
     <make>precog.heart_beat($period,$key,$value)</make>

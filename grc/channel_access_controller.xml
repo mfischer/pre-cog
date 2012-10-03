@@ -5,7 +5,7 @@
 ###################################################
  -->
 <block>
-    <name>Extras: Channel Access Controller</name>
+    <name>Channel Access Controller</name>
     <key>channel_access_controller</key>
     <import>import precog</import>
     <make>precog.channel_access_controller()</make>
