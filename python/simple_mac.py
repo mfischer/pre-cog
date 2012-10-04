@@ -118,6 +118,7 @@ class simple_mac(gr.block):
         self.arq_retxed = 0                                #how many times we've retransmitted
         self.failed_arq = 0
         self.max_attempts = max_attempts
+        self.throw_away = False
                                 
         self.arq_channel_state = ARQ_CHANNEL_IDLE
         self.expected_arq_id = 0                        #arq id we're expected to get ack for      
@@ -213,6 +214,7 @@ class simple_mac(gr.block):
                             self.send_ack(incoming_pkt,incoming_pkt[PKT_INDEX_SRC],incoming_pkt[PKT_INDEX_CNT])                        #Then send ACK then
                             if not (self.arq_expected_sequence_number == incoming_pkt[PKT_INDEX_CNT]):
                                 self.arq_sequence_error_cnt += 1
+                                self.throw_away = True
                             self.arq_expected_sequence_number =  ( incoming_pkt[PKT_INDEX_CNT] + 1 ) % 255 
                         else:
                             if not (self.no_arq_expected_sequence_number == incoming_pkt[PKT_INDEX_CNT]):
@@ -233,7 +235,9 @@ class simple_mac(gr.block):
                         
                         #do something with incoming user data
                         elif(incoming_protocol_id == USER_IO_PROTOCOL_ID):
-                            self.output_user_data(incoming_pkt)                        
+                            if not self.throw_away:
+                                self.output_user_data(incoming_pkt)   
+                            self.throw_away = False
                                 
                         else:
                             print 'unknown protocol'
