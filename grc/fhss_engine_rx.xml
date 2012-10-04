@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+###################################################
+##TDMA Engine
+###################################################
+ -->
+<block>
+    <name>FHSS Engine Rx</name>
+    <key>fhss_engine_rx</key>
+    <import>import precog</import>
+    <make>precog.fhss_engine_rx($hop_interval,$post_tune_guard_interval,$pre_tune_guard_interval,$rx_freq_list,$lead_limit,$link_bps)</make>
+    <param>
+        <name>Hop Interval(s)</name>
+        <key>hop_interval</key>
+        <type>real</type>
+    </param>
+    <param>
+        <name>Post Tune Guard(s)</name>
+        <key>post_tune_guard_interval</key>
+        <type>real</type>
+    </param>
+        <param>
+        <name>Pre Tune Guard(s)</name>
+        <key>pre_tune_guard_interval</key>
+        <type>real</type>
+    </param>
+    <param>
+        <name>Rx Frequency List(Hz)</name>
+        <key>rx_freq_list</key>
+        <type>string</type>
+    </param>
+        <param>
+        <name>Lead Limit(s)</name>
+        <key>lead_limit</key>
+        <type>real</type>
+    </param>
+        <param>
+        <name>Link Speed(bps)</name>
+        <key>link_bps</key>
+        <type>real</type>
+    </param>
+    <sink>
+        <name>usrp</name>
+        <type>complex</type>
+    </sink>
+    <sink>
+        <name>in_pkt_in</name>
+        <type></type>
+        <optional>1</optional>
+    </sink>
+    <sink>
+        <name>ctrl_port_in</name>
+        <type></type>
+        <optional>1</optional>
+    </sink>
+    <source>
+        <name>to_app</name>
+        <type></type>
+        <optional>1</optional>
+    </source>
+    <source>
+        <name>ctrl_port_out</name>
+        <type></type>
+        <optional>1</optional>
+    </source>
+    <doc>
+FHSS Implementation
+    </doc>
+</block>
