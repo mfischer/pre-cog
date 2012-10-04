@@ -28,8 +28,7 @@ import gnuradio.digital as gr_digital
 import gnuradio.extras #brings in gr.block
 import Queue
 import time
-import math
-import extras_swig 
+import math 
 
 
 #arq definitions

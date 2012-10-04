@@ -50,9 +50,9 @@ try: #it may not exist based on prereqs
     from channel_access_controller import *
 except ImportError: pass
 
-try: #it may not exist based on prereqs
-    from virtual_channel_formatter import *
-except ImportError: pass
+
+from virtual_channel_formatter import *
+
 
 
 from fhss_engine_tx import *
