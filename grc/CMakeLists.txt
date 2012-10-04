@@ -30,8 +30,11 @@ list(APPEND grc_sources
     virtual_channel_formatter.xml
     virtual_channel_mux.xml
     virtual_channel_demux.xml
-    fhss_engine.xml
+    fhss_engine_tx.xml
+    fhss_engine_rx.xml
     block_tree.xml
+    packet_framer.xml
+    packet_deframer.xml
 )
 
 install(

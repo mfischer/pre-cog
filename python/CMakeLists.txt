@@ -33,7 +33,9 @@ list(APPEND python_sources
     channel_access_controller.py
     tdma_engine.py
     virtual_channel_formatter.py
-    fhss_engine.py
+    fhss_engine_tx.py
+    fhss_engine_rx.py
+    packet_framer.py
     #virtual_channel_mux.py
 )
 

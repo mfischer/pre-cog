@@ -26,9 +26,9 @@ from gnuradio import gr
 from gruel import pmt
 from gnuradio.digital import packet_utils
 import gnuradio.digital as gr_digital
-import gnuradio.extras #brings in gr.block
+#import gnuradio.extras #brings in gr.block
 import time
-import extras_swig 
+import gnuradio.extras as gr_extras
 
 SEARCH_EOB_IN = 0
 FOUND_EOB_IN = 1
@@ -45,8 +45,7 @@ class burst_gate(gr.block):
     def __init__(self):
         gr.block.__init__(self, name="burst_gate", in_sig=[numpy.complex64], out_sig=[numpy.complex64])
         #self.set_auto_consume(False)
-        self.set_tag_propagation_policy(extras_swig.TPP_DONT)
-    
+        self.set_tag_propagation_policy(gr_extras.TPP_DONT)    
 
     def work(self, input_items, output_items):
         self.state = SEARCH_EOB_IN

@@ -36,9 +36,7 @@ try: #it may not exist based on prereqs
     from heart_beat import heart_beat
 except ImportError: pass
 
-try: #it may not exist based on prereqs
-    from burst_gate import burst_gate
-except ImportError: pass
+from burst_gate import burst_gate
 
 try: #it may not exist based on prereqs
     from tdma_engine import tdma_engine
@@ -57,7 +55,8 @@ try: #it may not exist based on prereqs
 except ImportError: pass
 
 
-from fhss_engine import *
-
+from fhss_engine_tx import *
+from fhss_engine_rx import *
+from packet_framer import *
 
 
