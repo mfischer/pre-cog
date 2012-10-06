@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+###################################################
+##msg-to-stdout
+###################################################
+ -->
+<block>
+    <name>Msg_To_Stdout</name>
+    <key>msg_to_stdout</key>
+    <import>import precog</import>
+    <make>precog.msg_to_stdout()</make>
+    <sink>
+        <name>in</name>
+        <type></type>
+    </sink>
+    <doc>
+Output message to stdout when received on msg queue input.
+    </doc>
+</block>

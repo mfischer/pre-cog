@@ -35,6 +35,7 @@ list(APPEND grc_sources
     block_tree.xml
     packet_framer.xml
     packet_deframer.xml
+    msg_to_stdout.xml
 )
 
 install(
