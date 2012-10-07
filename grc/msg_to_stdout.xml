@@ -6,7 +6,7 @@
  -->
 <block>
     <name>Msg_To_Stdout</name>
-    <key>msg_to_stdout</key>
+    <key>precog_msg_to_stdout</key>
     <import>import precog</import>
     <make>precog.msg_to_stdout()</make>
     <sink>
