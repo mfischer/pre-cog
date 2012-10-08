@@ -98,16 +98,15 @@ class selective_arq_transmitter(object):
         if self.ack_count < seq_no:
             ackd_packets = int(seq_no - self.ack_count)
             self.ack_count = seq_no
-            self.buf = self.tx_buf[ackd_packets:]
+            self.tx_buf = self.tx_buf[ackd_packets:]
         elif seq_no < ((self.ack_count + self.tx_wsz) % MAX):
             ackd_packets = int(abs(seq_no - self.ack_count))
             self.ack_count = seq_no
-            self.buf = self.tx_buf[ackd_packets:]
+            self.tx_buf = self.tx_buf[ackd_packets:]
 
-        #print 'Received ack #%u' % data[PKT_INDEX_CNT]
 
     def is_busy(self):
-        return self.tx_count >= self.ack_count + self.tx_wsz
+        return self.tx_count >= (self.ack_count + self.tx_wsz % MAX)
 
     def transmit(self, msg, dest, protocol_id, control):
         if type(msg) is not str:
