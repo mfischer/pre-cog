@@ -2,9 +2,10 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Simple Trx
-# Generated: Fri Oct  5 14:00:08 2012
+# Generated: Sun Oct  7 13:19:44 2012
 ##################################################
 
+execfile("/home/john/.grc_gnuradio/radio_hier.py")
 from gnuradio import eng_notation
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
@@ -17,7 +18,7 @@ import wx
 
 class simple_trx(grc_wxgui.top_block_gui):
 
-	def __init__(self, args="", rx_freq=915e6, rx_gain=15, max_arq_attempts=10, ampl=0.7, dest_addr=86, arq_timeout=.10, radio_addr=0, samp_per_sym=4, rate=1e6, tx_gain=15, freq=915e6, port="12347"):
+	def __init__(self, args="", rx_gain=15, max_arq_attempts=10, ampl=0.7, dest_addr=86, arq_timeout=.10, radio_addr=0, samp_per_sym=4, rate=1e6, tx_gain=15, freq=915e6, port="12347", rx_freq=915e6, tx_freq=915e6, rx_antenna="TX/RX"):
 		grc_wxgui.top_block_gui.__init__(self, title="Simple Trx")
 		_icon_path = "/usr/share/icons/hicolor/32x32/apps/gnuradio-grc.png"
 		self.SetIcon(wx.Icon(_icon_path, wx.BITMAP_TYPE_ANY))
@@ -26,7 +27,6 @@ class simple_trx(grc_wxgui.top_block_gui):
 		# Parameters
 		##################################################
 		self.args = args
-		self.rx_freq = rx_freq
 		self.rx_gain = rx_gain
 		self.max_arq_attempts = max_arq_attempts
 		self.ampl = ampl
@@ -38,6 +38,9 @@ class simple_trx(grc_wxgui.top_block_gui):
 		self.tx_gain = tx_gain
 		self.freq = freq
 		self.port = port
+		self.rx_freq = rx_freq
+		self.tx_freq = tx_freq
+		self.rx_antenna = rx_antenna
 
 		##################################################
 		# Variables
@@ -49,6 +52,17 @@ class simple_trx(grc_wxgui.top_block_gui):
 		##################################################
 		self.virtual_channel_formatter_0 = precog.virtual_channel_formatter(dest_addr,1)
 		self.simple_mac_0 = precog.simple_mac(radio_addr,arq_timeout,max_arq_attempts)
+		self.radio_hier_0 = radio_hier(
+			rate=samp_rate,
+			tx_gain=tx_gain,
+			rx_freq=rx_freq,
+			args=args,
+			rx_gain=rx_gain,
+			tx_freq=tx_freq,
+			rx_ant=rx_antenna,
+			ampl=ampl,
+			samp_per_sym=samp_per_sym,
+		)
 		self.heart_beat_0 = precog.heart_beat(0.001,"W","")
 		self.extras_socket_msg_0 = gr_extras.socket_msg("TCP", "127.0.0.1", port, 0)
 
@@ -59,24 +73,22 @@ class simple_trx(grc_wxgui.top_block_gui):
 		self.connect((self.simple_mac_0, 1), (self.extras_socket_msg_0, 0))
 		self.connect((self.virtual_channel_formatter_0, 0), (self.simple_mac_0, 1))
 		self.connect((self.heart_beat_0, 0), (self.simple_mac_0, 2))
+		self.connect((self.radio_hier_0, 0), (self.simple_mac_0, 0))
+		self.connect((self.simple_mac_0, 0), (self.radio_hier_0, 0))
 
 	def get_args(self):
 		return self.args
 
 	def set_args(self, args):
 		self.args = args
-
-	def get_rx_freq(self):
-		return self.rx_freq
-
-	def set_rx_freq(self, rx_freq):
-		self.rx_freq = rx_freq
+		self.radio_hier_0.set_args(self.args)
 
 	def get_rx_gain(self):
 		return self.rx_gain
 
 	def set_rx_gain(self, rx_gain):
 		self.rx_gain = rx_gain
+		self.radio_hier_0.set_rx_gain(self.rx_gain)
 
 	def get_max_arq_attempts(self):
 		return self.max_arq_attempts
@@ -89,6 +101,7 @@ class simple_trx(grc_wxgui.top_block_gui):
 
 	def set_ampl(self, ampl):
 		self.ampl = ampl
+		self.radio_hier_0.set_ampl(self.ampl)
 
 	def get_dest_addr(self):
 		return self.dest_addr
@@ -113,6 +126,7 @@ class simple_trx(grc_wxgui.top_block_gui):
 
 	def set_samp_per_sym(self, samp_per_sym):
 		self.samp_per_sym = samp_per_sym
+		self.radio_hier_0.set_samp_per_sym(self.samp_per_sym)
 
 	def get_rate(self):
 		return self.rate
@@ -126,6 +140,7 @@ class simple_trx(grc_wxgui.top_block_gui):
 
 	def set_tx_gain(self, tx_gain):
 		self.tx_gain = tx_gain
+		self.radio_hier_0.set_tx_gain(self.tx_gain)
 
 	def get_freq(self):
 		return self.freq
@@ -139,18 +154,38 @@ class simple_trx(grc_wxgui.top_block_gui):
 	def set_port(self, port):
 		self.port = port
 
+	def get_rx_freq(self):
+		return self.rx_freq
+
+	def set_rx_freq(self, rx_freq):
+		self.rx_freq = rx_freq
+		self.radio_hier_0.set_rx_freq(self.rx_freq)
+
+	def get_tx_freq(self):
+		return self.tx_freq
+
+	def set_tx_freq(self, tx_freq):
+		self.tx_freq = tx_freq
+		self.radio_hier_0.set_tx_freq(self.tx_freq)
+
+	def get_rx_antenna(self):
+		return self.rx_antenna
+
+	def set_rx_antenna(self, rx_antenna):
+		self.rx_antenna = rx_antenna
+		self.radio_hier_0.set_rx_ant(self.rx_antenna)
+
 	def get_samp_rate(self):
 		return self.samp_rate
 
 	def set_samp_rate(self, samp_rate):
 		self.samp_rate = samp_rate
+		self.radio_hier_0.set_rate(self.samp_rate)
 
 if __name__ == '__main__':
 	parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
 	parser.add_option("", "--args", dest="args", type="string", default="",
 		help="Set args [default=%default]")
-	parser.add_option("", "--rx-freq", dest="rx_freq", type="eng_float", default=eng_notation.num_to_str(915e6),
-		help="Set rx_freq [default=%default]")
 	parser.add_option("", "--rx-gain", dest="rx_gain", type="eng_float", default=eng_notation.num_to_str(15),
 		help="Set rx_gain [default=%default]")
 	parser.add_option("", "--max-arq-attempts", dest="max_arq_attempts", type="intx", default=10,
@@ -173,7 +208,13 @@ if __name__ == '__main__':
 		help="Set freq [default=%default]")
 	parser.add_option("", "--port", dest="port", type="string", default="12347",
 		help="Set port [default=%default]")
+	parser.add_option("", "--rx-freq", dest="rx_freq", type="eng_float", default=eng_notation.num_to_str(915e6),
+		help="Set rx_freq [default=%default]")
+	parser.add_option("", "--tx-freq", dest="tx_freq", type="eng_float", default=eng_notation.num_to_str(915e6),
+		help="Set tx_freq [default=%default]")
+	parser.add_option("", "--rx-antenna", dest="rx_antenna", type="string", default="TX/RX",
+		help="Set rx_antenna [default=%default]")
 	(options, args) = parser.parse_args()
-	tb = simple_trx(args=options.args, rx_freq=options.rx_freq, rx_gain=options.rx_gain, max_arq_attempts=options.max_arq_attempts, ampl=options.ampl, dest_addr=options.dest_addr, arq_timeout=options.arq_timeout, radio_addr=options.radio_addr, samp_per_sym=options.samp_per_sym, rate=options.rate, tx_gain=options.tx_gain, freq=options.freq, port=options.port)
+	tb = simple_trx(args=options.args, rx_gain=options.rx_gain, max_arq_attempts=options.max_arq_attempts, ampl=options.ampl, dest_addr=options.dest_addr, arq_timeout=options.arq_timeout, radio_addr=options.radio_addr, samp_per_sym=options.samp_per_sym, rate=options.rate, tx_gain=options.tx_gain, freq=options.freq, port=options.port, rx_freq=options.rx_freq, tx_freq=options.tx_freq, rx_antenna=options.rx_antenna)
 	tb.Run(True)
 
