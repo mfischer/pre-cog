@@ -67,6 +67,9 @@ class selective_arq_receiver(object):
             self.rx_count += 1
             self.rx_count %= MAX
             self.pass_up(data)
+            while(self.rx_buf.has_key(self.rx_count)):
+                self.send_ack(self.rx_count, src)
+                self.pass_up(self.rx_buf.pop(self.rx_count))
 
         elif (seq_no > self.rx_count) and seq_no < self.rx_count + self.rx_wsz:
             self.rx_buf[seq_no] = data
