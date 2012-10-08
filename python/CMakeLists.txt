@@ -27,6 +27,7 @@ list(APPEND python_sources
     transition_detect.py
     msg_to_stdout.py
     simple_mac.py
+    selective_arq_mac.py
     append_key.py
     heart_beat.py
     burst_gate.py

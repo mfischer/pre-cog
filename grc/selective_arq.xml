@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+###################################################
+##Adder
+###################################################
+ -->
+<block>
+    <name>Selective ARQ MAC</name>
+    <key>selective_arq_mac</key>
+    <category>Pre-Cog</category>
+    <import>import precog</import>
+    <make>precog.selective_arq_mac($addr,$tx_wsz,$rx_wsz)</make>
+    <param>
+        <name>Address(0-255)</name>
+        <key>addr</key>
+        <type>int</type>
+    </param>
+    <param>
+        <name>TX  window size </name>
+        <key>tx_wsz</key>
+        <type>int</type>
+    </param>
+    <param>
+        <name>RX window</name>
+        <key>rx_wsz</key>
+        <type>real</type>
+    </param>
+    <sink>
+        <name>from_radio</name>
+        <type></type>
+    </sink>
+        <sink>
+        <name>from_app</name>
+        <type></type>
+        <optional>1</optional>
+    </sink>
+        <sink>
+        <name>ctrl_in</name>
+        <type></type>
+        <optional>1</optional>
+    </sink>
+    <source>
+        <name>to_radio</name>
+        <type></type>
+    </source>
+    <source>
+        <name>to_app</name>
+        <type></type>
+        <optional>1</optional>
+    </source>
+    <source>
+        <name>ctrl_out</name>
+        <type></type>
+        <optional>1</optional>
+    </source>
+    <doc>
+	    Test Foo
+    </doc>
+</block>

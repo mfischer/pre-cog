@@ -28,6 +28,12 @@ except ImportError: pass
 
 from simple_mac import simple_mac
 
+try:
+    from selective_arq_mac import selective_arq_mac
+    from selective_arq_mac import selective_arq_transmitter
+    from selective_arq_mac import selective_arq_receiver
+except ImportError: pass
+
 try: #it may not exist based on prereqs
     from append_key import append_key
 except ImportError: pass

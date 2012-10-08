@@ -22,6 +22,7 @@
 ########################################################################
 list(APPEND grc_sources
     simple_mac.xml
+    selective_arq.xml
     append_key.xml
     heart_beat.xml
     burst_gate.xml
