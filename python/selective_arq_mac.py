@@ -129,6 +129,17 @@ class selective_arq_transmitter(object):
 
 
 class selective_arq_mac(gr.block):
+    """
+    This block implements a sliding window protocol,
+    it works roughly like this:
+
+    The transmitter is allowed to send up to tx_wsz packets more than he got ACK'd.
+    In case one of the packets get lost, the receiver will continue to receive up to
+    rx_wsz packets more than the last one he should have received.
+    The receiver will send an ACK for the last in-sequence packet to the transmitter,
+    which will allow the transmitter to remove the packet from its transmit buffer
+    upon reception of an ACK.
+    """
 
     def __init__(self, addr, tx_wsz=128, rx_wsz=42, name='selective_arq_mac'):
         self.receiver = selective_arq_receiver(addr, rx_wsz, self.to_lower_layer, self.to_upper_layer)
@@ -150,12 +161,20 @@ class selective_arq_mac(gr.block):
         self.queue = Queue.Queue()
 
     def to_lower_layer(self, pkt_str):
+	"""
+	This function describes how data gets pushed to the lower (PHY) layer.
+	One can just subclass this class to add custom ways to do this.
+	"""
         blob = self.mgr.acquire(True) #block
         pmt.pmt_blob_resize(blob, len(pkt_str))
         pmt.pmt_blob_rw_data(blob)[:] = numpy.fromstring(pkt_str, dtype='uint8')
         self.post_msg(0, pmt.pmt_string_to_symbol('U'), blob)
 
     def to_upper_layer(self, payload):
+	"""
+	This function describes how data gets pushed to the next higher layer.
+	One can just subclass this class to add custom ways to do this.
+	"""
         payload_len = len(payload)
         if (payload_len > 5):
             payload = payload[5:]
@@ -166,13 +185,16 @@ class selective_arq_mac(gr.block):
         self.post_msg(1, pmt.pmt_string_to_symbol('U'), blob)
 
     def work(self, input_items, output_items):
+	"""
+	This is the work function ... every gr.block should have one.
+	"""
 
         while(1):
             try: msg = self.pop_msg_queue()
             except: return -1
 
             if not pmt.pmt_is_blob(msg.value):
-                print '[%s] not a blob' % self.name()
+                #print '[%s] not a blob' % self.name()
                 continue
 
             # we received something on the app port
