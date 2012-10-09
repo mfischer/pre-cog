@@ -37,7 +37,8 @@ list(APPEND python_sources
     fhss_engine_rx.py
     packet_framer.py
     msg_to_stdout.py
-    #virtual_channel_mux.py
+    virtual_channel_mux.py
+    virtual_channel_demux.py
 )
 
 GR_PYTHON_INSTALL(
