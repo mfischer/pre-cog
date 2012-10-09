@@ -42,6 +42,6 @@
         <block>virtual_channel_formatter</block>
         <block>virtual_channel_mux</block>
         <block>precog_msg_to_stdout</block>
-        
+        <block>precog_bsc</block>
     </cat>
 </cat>

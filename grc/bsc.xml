@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+###################################################
+##Binary Symmetric Channel
+###################################################
+ -->
+<block>
+    <name>Binary Symmetric Channel</name>
+    <key>precog_bsc</key>
+    <import>import precog</import>
+    <make>precog.bsc($ber,$bpb)</make>
+    <param>
+        <name>BER (Bit error rate)</name>
+        <key>ber</key>
+	<value>0.01</value>
+        <type>real</type>
+    </param>
+    <param>
+        <name>Bits per byte</name>
+        <key>bpb</key>
+	<value>8</value>
+        <type>int</type>
+    </param>
+    <sink>
+        <name>in</name>
+	<type>byte</type>
+    </sink>
+    <source>
+        <name>out</name>
+        <type>byte</type>
+    </source>
+    <doc>
+    This block implements a BSC (binary symmetric channel,
+    for use with the MACs in Pre-Cog, or other blob based stuff.
+
+    It has two parameters, the intended BER (bit error rate),
+    and the number of the bits that are used in the one byte
+    input messages.
+    </doc>
+</block>
