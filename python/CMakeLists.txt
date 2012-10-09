@@ -37,6 +37,7 @@ list(APPEND python_sources
     fhss_engine_rx.py
     packet_framer.py
     msg_to_stdout.py
+    bsc.py
     #virtual_channel_mux.py
 )
 

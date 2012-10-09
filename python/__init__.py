@@ -25,6 +25,9 @@ try: #it may not exist based on prereqs
     from msg_to_stdout import msg_to_stdout
 except ImportError: pass
 
+try: #it may not exist based on prereqs
+    from bsc import bsc
+except ImportError: pass
 
 from simple_mac import simple_mac
 
