@@ -8,25 +8,27 @@
     <name>Virtual Channel Mux</name>
     <key>virtual_channel_mux</key>
     <import>import precog</import>
-    <make>precog.virtual_channel_mux($ports)</make>
+    <make>precog.virtual_channel_mux($port_count)</make>
     <param>
         <name>Input Ports</name>
-        <key>ports</key>
+        <key>port_count</key>
         <value>2</value>
         <type>int</type>
     </param>
     <sink>
         <name>in</name>
         <type></type>
-        <nports>$ports</nports>
+        <nports>$port_count</nports>
+        <optional>1</optional>
     </sink>
     <source>
         <name>out</name>
         <type></type>
+        <optional>1</optional>
     </source>
 
  
     <doc>
-Virtual channel mux.
+Virtual channel mux.  Adds byte header that is used by demux block to route.
     </doc>
 </block>

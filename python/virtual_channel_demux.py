@@ -33,49 +33,57 @@ import math
 
 
 # /////////////////////////////////////////////////////////////////////////////
-#                   Virtual Channel Mux
+#                   Virtual Channel Formatter
 # /////////////////////////////////////////////////////////////////////////////
 
-class virtual_channel_mux(gr.block):
+class virtual_channel_demux(gr.block):
     """
-    Mux data from multiple sources and add header for routing
+    Examine header byte and route to appropriate output
     """
     def __init__(
         self,port_count
     ):
         """
-        The inputs are a pmt message blob.
-        Non-blob messages will be ignored.
+        The input is a pmt message blob.
+        Output are message blobs
         """
 
         gr.block.__init__(
             self,
-            name = "virtual_channel_mux",
+            name = "virtual_channel_demux",
             in_sig = None,
             out_sig = None,
-            num_msg_inputs = port_count,
-            num_msg_outputs = 1,
+            num_msg_inputs = 1,
+            num_msg_outputs = port_count,
         )
     
         self.mgr = pmt.pmt_mgr()
         for i in range(64):
             self.mgr.set(pmt.pmt_make_blob(10000))
+            
+        self.port_count = port_count
         
     def work(self, input_items, output_items):
         
         while(1):
             try: msg = self.pop_msg_queue()
             except: return -1
-
+            
             if not pmt.pmt_is_blob(msg.value): 
-                print "not a blob - virtual mux"
+                print "not a blob - virtual demux"
                 continue
 
-            #insert header byte so demux can route to appropriate output
-            data = numpy.concatenate([numpy.array([msg.offset]),pmt.pmt_blob_data(msg.value)])
+            incoming_array = pmt.pmt_blob_data(msg.value)
+            outgoing_array = incoming_array[1:]
             
+            output_port = int(incoming_array[0])
+
+            #check to make sure the byte header is within our valid range
+            if  ( output_port > ( self.port_count - 1 ) ):
+                print 'received msg outside of port range'
+                continue
+
             blob = self.mgr.acquire(True) #block
-            pmt.pmt_blob_resize(blob, len(data))
-            pmt.pmt_blob_rw_data(blob)[:] = data
-            self.post_msg(0,msg.key,blob,pmt.pmt_string_to_symbol('mux')) #pass incoming key for transparency
-            
+            pmt.pmt_blob_resize(blob, len(outgoing_array))
+            pmt.pmt_blob_rw_data(blob)[:] = outgoing_array
+            self.post_msg(output_port,pmt.pmt_string_to_symbol('n/a'),blob,pmt.pmt_string_to_symbol('demux'))

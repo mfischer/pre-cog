@@ -8,21 +8,23 @@
     <name>Virtual Channel Demux</name>
     <key>virtual_channel_demux</key>
     <import>import precog</import>
-    <make>precog.virtual_channel_demux($ports)</make>
+    <make>precog.virtual_channel_demux($port_count)</make>
     <param>
         <name>Output Ports</name>
-        <key>ports</key>
+        <key>port_count</key>
         <value>2</value>
         <type>int</type>
     </param>
     <sink>
         <name>in</name>
         <type></type>
+        <optional>1</optional>
     </sink>
     <source>
         <name>out</name>
         <type></type>
-        <nports>$ports</nports>
+        <nports>$port_count</nports>
+        <optional>1</optional>
     </source>
  
     <doc>

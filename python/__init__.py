@@ -55,7 +55,8 @@ except ImportError: pass
 
 
 from virtual_channel_formatter import *
-
+from virtual_channel_mux import * 
+from virtual_channel_demux import *
 
 
 from fhss_engine_tx import *

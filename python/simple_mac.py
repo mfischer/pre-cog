@@ -215,6 +215,8 @@ class simple_mac(gr.block):
                             if not (self.arq_expected_sequence_number == incoming_pkt[PKT_INDEX_CNT]):
                                 self.arq_sequence_error_cnt += 1
                                 self.throw_away = True
+                            else:
+                                self.throw_away = False
                             self.arq_expected_sequence_number =  ( incoming_pkt[PKT_INDEX_CNT] + 1 ) % 255 
                         else:
                             if not (self.no_arq_expected_sequence_number == incoming_pkt[PKT_INDEX_CNT]):

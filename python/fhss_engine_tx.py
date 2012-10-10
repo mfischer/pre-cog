@@ -115,7 +115,7 @@ class fhss_engine_tx(gr.block):
 
         self.has_old_msg = False
         self.overhead = 20
-        self.pad_data = numpy.zeros( ( 1, 25),dtype='uint8')[0]
+        self.pad_data = numpy.zeros( ( 1, 1500),dtype='uint8')[0]
         #print self.pad_data
         self.tx_slots_passed = 0
     
@@ -124,6 +124,8 @@ class fhss_engine_tx(gr.block):
         self.tune_lead = 0.003
         self.rx_hop_index = 0
         self.consecutive_miss = 0
+        
+        
     
     def tx_frames(self):
         #send_sob
@@ -133,7 +135,7 @@ class fhss_engine_tx(gr.block):
         #get all of the packets we want to send
         total_byte_count = 0
         frame_count = 0
-        
+        a = pmt.from_python( ( ( self.tx_freq_list[self.hop_index] , ), { } ) )
         self.post_msg(CTRL_PORT,pmt.pmt_string_to_symbol('usrp_sink.set_command_time'),pmt.from_python( ( ( self.interval_start , ), { } ) ),pmt.pmt_string_to_symbol('fhss'))
         self.post_msg(CTRL_PORT,pmt.pmt_string_to_symbol('usrp_sink.set_center_freq'),pmt.from_python( ( ( self.tx_freq_list[self.hop_index] , ), { } ) ),pmt.pmt_string_to_symbol('fhss'))
         self.post_msg(CTRL_PORT,pmt.pmt_string_to_symbol('usrp_sink.clear_command_time'),pmt.from_python( ( ( 0 , ), { } ) ),pmt.pmt_string_to_symbol('fhss'))
@@ -190,7 +192,7 @@ class fhss_engine_tx(gr.block):
             #send remining frames, blob only
             while(frame_count > 0):
                 msg = self.tx_queue.get()
-                data = pmt.pmt_blob_data(msg.value)
+                data = numpy.concatenate([HAS_DATA,pmt.pmt_blob_data(msg.value)])
                 blob = self.mgr.acquire(True) #block
                 pmt.pmt_blob_resize(blob, len(data))
                 pmt.pmt_blob_rw_data(blob)[:] = data
