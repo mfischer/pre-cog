@@ -20,6 +20,7 @@
 #
 
 import time
+import random
 
 from gnuradio import gr
 from gruel import pmt
