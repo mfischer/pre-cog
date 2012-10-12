@@ -151,7 +151,7 @@ class fhss_engine_rx(gr.block):
                         #print 'pkt_rcved_2',self.time_update,self.start_hop,self.next_tune_time
 
             else:
-                a = 0                               #CONTROL port
+                pass                               #CONTROL port
             
         #process streaming samples and tags here
         in0 = input_items[0]

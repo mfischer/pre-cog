@@ -213,5 +213,5 @@ class _queue_to_blob(gr.block):
                 pmt.pmt_blob_rw_data(blob)[:] = payload
                 self.post_msg(0, pmt.pmt_string_to_symbol("ok"), blob)
             else:
-                a = 0
+                pass
 

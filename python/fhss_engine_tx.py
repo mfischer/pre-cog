@@ -217,7 +217,7 @@ class fhss_engine_tx(gr.block):
                 self.queue.put(msg)                 #if outgoing, put in queue for processing
 
             else:
-                a = 0                               #CONTROL port
+                pass                               #CONTROL port
             
         #process streaming samples and tags here
         in0 = input_items[0]
